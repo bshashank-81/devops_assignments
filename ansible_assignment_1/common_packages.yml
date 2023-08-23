@@ -1,0 +1,17 @@
+- name: Install Services
+  hosts: target1,target2
+  become: yes
+
+  vars:
+    services_to_install:
+      - httpd
+      - maven
+      - java
+      - docker
+
+  tasks:
+    - name: Install services
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ services_to_install }}"
